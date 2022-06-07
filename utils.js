@@ -23,3 +23,30 @@ function getIntersection(A, B, C, D){
 
     return null;
 }
+
+// find whether 2 polygons intersect
+function polyIntersect(poly1, poly2) {
+    for(let i=0; i<poly1.length; i++) {
+        for(let j=0; j<poly2.length; j++) {
+            const touch = getIntersection(
+                poly1[i],
+                poly1[(i+1)%poly1.length], // i+1 will be greater than poly.length. this outputs as 0 instead, which therefore reconnects back to the first point in polygon (i.e. poly[0])
+                poly2[j],
+                poly2[(j+1)%poly2.length]
+            )
+            if(touch) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// for visualiser
+function getRGBA(value){
+    const alpha=Math.abs(value);
+    const R=value<0?0:255;
+    const G=R;
+    const B=value>0?0:255;
+    return "rgba("+R+","+G+","+B+","+alpha+")";
+}
