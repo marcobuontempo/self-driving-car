@@ -7,7 +7,7 @@ class Road {
         this.left = this.x - this.width/2;
         this.right = this.x + this.width/2;
 
-        const infinity = 100000000;
+        const infinity = 10000000;
         this.top = -infinity;
         this.bottom = infinity;
 
@@ -39,7 +39,7 @@ class Road {
             );
 
             // to draw each middle lane
-            ctx.setLineDash([20,20]); // set dashes for middle lanes NOT WORKING IN CHROME(?)
+            ctx.setLineDash([20,20]);
             ctx.beginPath();
             ctx.moveTo(x, this.top);
             ctx.lineTo(x, this.bottom);
@@ -50,7 +50,6 @@ class Road {
         ctx.setLineDash([]);
         this.borders.forEach(border => {
             ctx.beginPath();
-            ctx.strokeStyle = "yellow"
             ctx.moveTo(border[0].x, border[0].y);
             ctx.lineTo(border[1].x, border[1].y);
             ctx.stroke();

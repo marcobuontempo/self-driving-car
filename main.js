@@ -8,13 +8,12 @@ const car = new Car(road.getLaneCenter(1),100,30,50);
 
 // Draw canvas
 const ctx = canvas.getContext("2d");
-car.draw(ctx);
 
 // Animate canvas
 animate();
 
 function animate() {
-    car.update();
+    car.update(road.borders);
     canvas.height = window.innerHeight; //Ensures canvas is cleared and re-rendered after each animation call
 
     ctx.save();

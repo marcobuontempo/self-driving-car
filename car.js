@@ -12,12 +12,15 @@ class Car {
 
         this.angle = 0; // angle of the car
 
+        this.sensor = new Sensor(this);
+
         this.controls = new Controls(); // u/d/l/r key inputs
     }
 
     // update the car's state
-    update() {
+    update(roadBorders) {
         this.#move();
+        this.sensor.update(roadBorders);
     }
 
     // logic for car's movement
@@ -70,11 +73,12 @@ class Car {
         this.y -= Math.cos(this.angle)*this.speed;
     }
 
-    // draw rectangle of car
+    // draw rectangle of car and sensors
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x,this.y);
         ctx.rotate(-this.angle);
+        
         ctx.beginPath();
         ctx.rect(
             -this.width/2,
@@ -85,5 +89,7 @@ class Car {
         ctx.fill();
 
         ctx.restore();
+        
+        this.sensor.draw(ctx);
     }
 }
